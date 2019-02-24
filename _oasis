@@ -1,0 +1,36 @@
+OASISFormat: 0.4
+Name:        ounit_sample
+Version:     0.0.1
+Synopsis:    A sample of oUnit which a test framework for OCaml.
+Authors:     msfukui
+License:     MIT
+Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+BuildTools:  ocamlbuild
+
+# ライブラリ名
+Library ounit_sample
+  # ソースの場所
+  Path: src
+  # ビルドするモジュール
+  Modules: Ounit_sample
+
+# テスト用のバイナリの名前
+Executable test
+  # テストコードの場所
+  Path: tests
+  # テストコードのエントリポイント
+  MainIs: test.ml
+  Build$: flag(tests)
+  # ビルド結果のフォーマット
+  CompiledObject: native
+  # ビルドの必要がないため false
+  Install: false
+  # 依存モジュールを指定
+  BuildDepends: oUnit, ounit_sample
+
+Test test
+  Run$:             flag(tests)
+  # テストコマンド
+  Command:          $test
+  # テストを実行するディレクトリ名
+  WorkingDirectory: tests
